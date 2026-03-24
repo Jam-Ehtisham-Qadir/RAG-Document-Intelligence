@@ -1,0 +1,12 @@
+flask
+flask-cors
+python-dotenv
+pypdf
+faiss-cpu
+numpy
+sentence-transformers
+openai==0.28
+python-docx
+pytesseract
+Pillow
+openai-whisper
