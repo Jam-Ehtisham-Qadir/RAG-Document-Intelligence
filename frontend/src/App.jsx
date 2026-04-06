@@ -28,7 +28,7 @@ export default function App() {
     formData.append('file', uploadedFile)
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/upload', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
         method: 'POST',
         body: formData,
       })
@@ -60,7 +60,7 @@ export default function App() {
     setSources([])
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/ask', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question }),

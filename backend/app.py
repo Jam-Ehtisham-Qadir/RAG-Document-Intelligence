@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 import os
-import openai
+from openai import OpenAI
 import re
 import numpy as np
 import faiss
@@ -14,6 +14,7 @@ import docx
 import pytesseract
 from PIL import Image
 import whisper
+import platform
 
 load_dotenv()
 
@@ -23,7 +24,8 @@ CORS(app)
 embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # Tesseract path
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+if platform.system() == 'Windows':
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 def extract_text_from_pdf(file_path):
     reader = PdfReader(file_path)
@@ -225,9 +227,9 @@ Question: {question}
 
 Answer:"""
 
-        openai.api_key = os.getenv('OPENAI_API_KEY')
+        client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {
@@ -240,10 +242,10 @@ Answer:"""
                 }
             ],
             temperature=0,
-            max_tokens=100
+            max_tokens=2000
         )
 
-        answer = response['choices'][0]['message']['content']
+        answer = response.choices[0].message.content
 
         return jsonify({
             "answer": answer,
