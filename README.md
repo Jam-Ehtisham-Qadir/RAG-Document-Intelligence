@@ -110,7 +110,7 @@ rag-document-intelligence/
 
 ## 👤 Author
 
-**Jam Ehtisham Qadir** — AI/ML Engineer  
+**Jam Ehtisham Qadir** - Python Developer & AI/ ML Engineer  
 [LinkedIn](https://www.linkedin.com/in/jam-ehtisham-qadir-aaa691243)
 
 ---
