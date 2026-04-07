@@ -4,9 +4,11 @@ RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     ffmpeg \
     build-essential \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip setuptools wheel
+RUN pip install openai-whisper
 
 COPY frontend/dist /app/static
 
